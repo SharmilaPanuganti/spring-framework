@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+    "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+    <!-- <beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+                        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.0.xsd">   -->
+
+<beans> 
+        <!-- default-init-method="myInit" default-destroy-method="myDestroy" -->
+    <!-- <bean id="parenttriangle" class="cgg.springdemo.Triangle" name="triangle-name" abstract="true" >  -->
+    <!-- autowire:byType(only one dependency of one type),constructor -->
+<!-- <property name="type" value="equaliteral triangle"/> -->
+<!-- <property name="height" value="12"/> -->
+<!-- <constructor-arg value="right angled"/> -->
+<!-- <constructor-arg value="20" type="int"/> -->
+<!-- <constructor-arg value="equilateral" type="java.lang.String"/> -->
+<!-- <constructor-arg value="equaliteral" index="1"/>
+<constructor-arg value="20" index="0"/> -->
+        <!-- <property name="pntA" ref="zeroPoint"/> -->
+        <!-- <property name="pntA">
+        <ref bean="pntA"/>
+        </property> -->
+        <!-- <property name="pntB">
+            <bean class="cgg.springdemo.Point">
+                <property name="X" value="-20"/>
+                <property name="Y" value="0"/>
+            </bean>
+        </property>
+        <property name="pntC">
+            <bean class="cgg.springdemo.Point">
+                <property name="X" value="20"/>
+                <property name="Y" value="0"/>
+            </bean>
+        </property> -->
+            <!-- <property name="points">
+                <list>   
+                (merge="true") -inheritance
+                    <ref bean="zeroPoint"/>
+                    <ref bean="Point1"/>
+                    <ref bean="Point2"/>
+                </list>
+            </property> -->
+    <!-- </bean> -->
+    <!-- Bean definition inheritance -->
+    <!-- <bean id="triange1" class="cgg.springdemo.Triangle" parent="parenttriangle" >
+        <property name="pntB" ref="pntB"/>
+        <property name="pntC" ref="pntC"/>
+    </bean>
+    <bean id="triange2" class="cgg.springdemo.Triangle" parent="parenttriangle" >
+        <property name="pntB" ref="pntB"/>
+        <property name="pntC" ref="pntC"/>
+    </bean> -->
+    <bean id="center" class="cgg.springdemo.Point" scope="prototype">
+        <!-- <qualifier value="circle"></qualifier> -->
+        <property name="X" value="${pntA.X}"/>
+        <property name="Y" value="${pntA.Y}"/>
+    </bean>
+    <bean id="pntB" class="cgg.springdemo.Point" scope="prototype">
+        <property name="X" value="-20"/>
+        <property name="Y" value="0"/>
+    </bean> 
+    <bean id="pntC" class="cgg.springdemo.Point" scope="prototype">
+        <property name="X" value="20"/>
+        <property name="Y" value="0"/>
+    </bean>
+    
+    <alias name="parenttriangle" alias="Triangle S"/>
+    <!-- <bean class="cgg.springdemo.DisplayNameBeanPostProcessor"/> -->
+    <!-- <bean class="cgg.springdemo.MyBeanFactoryPP"/> -->
+
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations" value="propertyConfig.properties" ></property>
+    </bean>
+
+
+    <bean class="cgg.springdemo.Circle" id="circle">
+         <!-- <property name="center" ref="pntA"></property>  -->
+    </bean>
+    <!-- <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"></bean> -->
+    <!-- <bean id="orginfo" class="cgg.springdemo.OrgInfo">
+        <property name="namesarray">
+            <value>John,Kane</value> 
+        </property>
+        <property name="empList">
+            <list>
+                <value>John</value>
+                <value>Kennedy</value>
+                <value>Ron</value>
+            </list>
+        </property>
+        <property name="empIdset">
+            <set>
+                <value>1001</value>
+                <value>1002</value>
+                <value>1002</value>
+            </set>
+        </property>
+        <property name="pointMap">
+            <map>
+                <entry key="102" value-ref="pntA"></entry>
+                <entry key="103" value-ref="pntB"></entry>
+                <entry key="104" value-ref="pntC"></entry>
+            </map>
+        </property>
+        <property name="info">
+            <props>
+                <prop key="xyz">Password123</prop>
+                <prop key="abc">Password345</prop>
+                <prop key="uvw">Password24</prop>
+            </props>
+        </property>
+    </bean> -->
+    <!-- <context:annotation-config/>
+    <context:component-scan base-package="cgg.springdemo"></context:component-scan> -->
+    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"></bean>
+</beans>
